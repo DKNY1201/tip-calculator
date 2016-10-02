@@ -21,7 +21,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Select theme, currenly this appliction support two themes: Dark theme & Light theme
+- [x] User can select theme, currently this application supports two themes: Dark theme & Light theme
 
 ## Video Walkthrough 
 
