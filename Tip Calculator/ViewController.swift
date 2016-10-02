@@ -15,14 +15,14 @@ struct Style {
     //static var
     static func darkTheme() {
         textColor = UIColor.white
-        backgroundColor = UIColor.init(red: 0.098, green: 0.3176, blue: 0.4392, alpha: 1)
+        backgroundColor = UIColor.init(red: 0.1216, green: 0.1216, blue: 0.1217, alpha: 1)
         highlightColor = UIColor.red
     }
     
     static func lightTheme() {
-        textColor = UIColor.black
-        backgroundColor = UIColor.init(red: 0.1647, green: 0.949, blue: 0.9922, alpha: 1)
-        highlightColor = UIColor.red
+        textColor = UIColor.white
+        backgroundColor = UIColor.init(red: 0.8667, green: 0.4588, blue: 0.3294, alpha: 1)
+        highlightColor = UIColor.init(red: 0.2314, green: 0.8706, blue: 0.7843, alpha: 1)
     }
     
     static func loadTheme() {
@@ -51,6 +51,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     
+    let userDefault = UserDefaults.standard
+    
     func calculateTips () {
         let tipPercentage = [0.18, 0.2, 0.22]
         let bill = Double(billField.text!) ?? 0
@@ -58,17 +60,14 @@ class ViewController: UIViewController {
         let total = bill + tip
         
         let numberFormat = NumberFormatter()
-        numberFormat.numberStyle = NumberFormatter.Style.decimal
+        numberFormat.numberStyle = NumberFormatter.Style.currency
+        numberFormat.currencySymbol = "$"
+        numberFormat.locale = Locale.current
         totalLabel.text = numberFormat.string(from: NSNumber(value: total))
-        
-        tipLabel.text = String(format: "$%.2f", tip)
-        //totalLabel.text = String(format: "$%.2f", total)
-        //totalLabel.text = numberFormat.string(from: NSNumber(Double: total))
-        
+        tipLabel.text = numberFormat.string(from: NSNumber(value: tip))
     }
     
     func selectSegment () {
-        let userDefault = UserDefaults.standard
         if let segmentVal = userDefault.object(forKey: "defaultPercentageVal") as? Int {
             self.tipSegment.selectedSegmentIndex = segmentVal
         }
@@ -86,10 +85,24 @@ class ViewController: UIViewController {
         self.tipSegment.tintColor = Style.textColor
     }
     
+    func loadBill() {
+        if let lastTime = userDefault.object(forKey: "lastTime") as? NSDate {
+            let intervalTime = -lastTime.timeIntervalSinceNow
+            print("Interval Time is \(intervalTime)")
+            if intervalTime <= 600 {
+                self.billField.text = userDefault.object(forKey: "lastBill") as! String?
+            } else {
+                userDefault.set(nil, forKey: "lastBill")
+                userDefault.set(nil, forKey: "lastTime")
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selectSegment()
         assignTheme()
+        loadBill()
         self.billField.becomeFirstResponder()
     }
 
@@ -113,6 +126,10 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTip(_ sender: AnyObject) {
         calculateTips()
+        let curDate = NSDate.init()
+        userDefault.set(curDate, forKey: "lastTime")
+        userDefault.set(self.billField.text, forKey: "lastBill")
+        userDefault.synchronize()
     }
 }
 
