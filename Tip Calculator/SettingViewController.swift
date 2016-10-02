@@ -27,11 +27,9 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userDefault = UserDefaults.standard
         if let segmentVal = userDefault.object(forKey: "defaultPercentageVal") as? Int {
             self.defaultPercentageSegment.selectedSegmentIndex = segmentVal
         }
-        
         if let themeSegmentVal = userDefault.object(forKey: "theme") as? Int {
             self.defaultThemeSegment.selectedSegmentIndex = themeSegmentVal
             
@@ -65,5 +63,4 @@ class SettingViewController: UIViewController {
         userDefault.synchronize()
         assignTheme()
     }
-    
 }

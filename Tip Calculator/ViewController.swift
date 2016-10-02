@@ -12,7 +12,7 @@ struct Style {
     static var textColor = UIColor.white
     static var backgroundColor = UIColor.gray
     static var highlightColor = UIColor.green
-    //static var
+
     static func darkTheme() {
         textColor = UIColor.white
         backgroundColor = UIColor.init(red: 0.1216, green: 0.1216, blue: 0.1217, alpha: 1)
@@ -88,9 +88,10 @@ class ViewController: UIViewController {
     func loadBill() {
         if let lastTime = userDefault.object(forKey: "lastTime") as? NSDate {
             let intervalTime = -lastTime.timeIntervalSinceNow
-            print("Interval Time is \(intervalTime)")
             if intervalTime <= 600 {
-                self.billField.text = userDefault.object(forKey: "lastBill") as! String?
+                if let lastBill = userDefault.object(forKey: "lastBill") as? String {
+                    self.billField.text = lastBill
+                }
             } else {
                 userDefault.set(nil, forKey: "lastBill")
                 userDefault.set(nil, forKey: "lastTime")
@@ -108,7 +109,6 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
