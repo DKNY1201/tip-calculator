@@ -29,15 +29,13 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://raw.githubusercontent.com/DKNY1201/tip-calculator/master/tip-calculator-gif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
-
 ## Notes
 
 Working best on iPhone 6, iPhone 6s
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2016 DKNY1201
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
