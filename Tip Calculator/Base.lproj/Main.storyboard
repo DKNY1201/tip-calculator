@@ -64,12 +64,12 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r6d-IB-0S7">
-                                <frame key="frameInset" minX="16" minY="252" width="343" height="8"/>
+                                <frame key="frameInset" minX="16" minY="248" width="343" height="8"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HNV-9Z-EqQ">
-                                <frame key="frameInset" minX="16" minY="372" width="343" height="29"/>
+                                <frame key="frameInset" minX="16" minY="375" width="343" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="18%"/>
@@ -164,13 +164,29 @@
                                     <action selector="setDefaultTheme:" destination="lfZ-Dh-F50" eventType="valueChanged" id="VYB-8d-l44"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Light" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFZ-Eq-q9L">
+                                <frame key="frameInset" minX="166" minY="323" width="39" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svC-sK-BW7">
+                                <frame key="frameInset" minX="166" minY="323" width="39" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.074509803921568626" green="0.24313725490196078" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="darkLabel" destination="svC-sK-BW7" id="Uq0-Qt-2Nt"/>
                         <outlet property="defaultPercentageSegment" destination="or8-U2-s7s" id="IT0-3e-SNg"/>
                         <outlet property="defaultThemeSegment" destination="RYg-CH-ygF" id="CC0-Mk-9tA"/>
+                        <outlet property="lightLabel" destination="fFZ-Eq-q9L" id="EMY-0u-JG8"/>
                         <outlet property="themeTxt" destination="vNW-Z4-gXa" id="J8I-kT-3QQ"/>
                         <outlet property="tipPercentageTxt" destination="WTH-cG-qWd" id="jvE-Xk-13v"/>
                     </connections>

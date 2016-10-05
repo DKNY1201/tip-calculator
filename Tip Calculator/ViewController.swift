@@ -118,7 +118,10 @@ class ViewController: UIViewController {
         Style.loadTheme()
         assignTheme()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     @IBAction func onTap(_ sender: AnyObject) {
         view.endEditing(true)

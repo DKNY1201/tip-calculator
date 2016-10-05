@@ -14,6 +14,8 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var defaultThemeSegment: UISegmentedControl!
     @IBOutlet weak var tipPercentageTxt: UILabel!
     @IBOutlet weak var themeTxt: UILabel!
+    @IBOutlet weak var lightLabel: UILabel!
+    @IBOutlet weak var darkLabel: UILabel!
     
     func assignTheme() {
         Style.loadTheme()
@@ -21,6 +23,7 @@ class SettingViewController: UIViewController {
         self.tipPercentageTxt.textColor = Style.textColor
         self.themeTxt.textColor = Style.textColor
         self.defaultPercentageSegment.tintColor = Style.textColor
+        
         self.defaultThemeSegment.tintColor = Style.textColor
     }
     
@@ -35,6 +38,24 @@ class SettingViewController: UIViewController {
             
         }
         assignTheme()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.defaultPercentageSegment.center.x += self.view.bounds.width
+        self.defaultThemeSegment.center.x -= self.view.bounds.width
+        
+        self.lightLabel.alpha = 0;
+        self.darkLabel.alpha = 0;
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.defaultPercentageSegment.center.x -= self.view.bounds.width
+            self.defaultThemeSegment.center.x += self.view.bounds.width
+        }, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,6 +80,37 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func setDefaultTheme(_ sender: AnyObject) {
+        if self.defaultThemeSegment.selectedSegmentIndex == 0 {
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
+                self.darkLabel.alpha = 1
+                self.darkLabel.transform = CGAffineTransform.init(scaleX: 4, y: 4)
+                }, completion: { (true)
+                    in
+                    UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                        self.darkLabel.alpha = 0
+                        }, completion: { (true)
+                            in
+                            self.darkLabel.transform = CGAffineTransform.identity
+                    })
+                    
+            })
+        } else {
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
+                self.lightLabel.alpha = 1
+                self.lightLabel.transform = CGAffineTransform.init(scaleX: 4, y: 4)
+                }, completion: { (true)
+                    in
+                    UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                        self.lightLabel.alpha = 0
+                        }, completion: { (true)
+                            in
+                            self.lightLabel.transform = CGAffineTransform.identity
+                    })
+                    
+            })
+        }
+        
+        
         userDefault.set(self.defaultThemeSegment.selectedSegmentIndex, forKey: "theme")
         userDefault.synchronize()
         assignTheme()
