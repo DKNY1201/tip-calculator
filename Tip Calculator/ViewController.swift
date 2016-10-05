@@ -40,7 +40,7 @@ struct Style {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var billTxt: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -99,12 +99,20 @@ class ViewController: UIViewController {
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let inverseSet = NSCharacterSet(charactersIn:"0123456789").inverted
+        let components = string.components(separatedBy: inverseSet)
+        let filtered = components.joined(separator: "")
+        return string == filtered
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selectSegment()
         assignTheme()
         loadBill()
         self.billField.becomeFirstResponder()
+        billField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
