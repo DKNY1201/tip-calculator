@@ -4,7 +4,7 @@
 
 Submitted by: **Tran Van Quy**
 
-Time spent: **16** hours spent in total
+Time spent: **22** hours spent in total
 
 ## User Stories
 
